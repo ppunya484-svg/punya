@@ -76,6 +76,8 @@ There is a critical need for a web-based system that automates donor-patient mat
 
 ## 5. System Architecture
 
+![System Architecture Diagram](architecture_diagram.png)
+
 The system follows a **three-tier client-server architecture**:
 
 ```
