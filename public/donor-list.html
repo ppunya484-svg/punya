@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor List - OrganDonate</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="icon">💚</span>
+            <span>OrganDonate</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/donor-list.html" class="active">Donors</a></li>
+            <li><a href="/register.html">Register</a></li>
+        </ul>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-auth">
+            <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+            <a href="/register.html" class="btn btn-primary btn-sm">Register</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="dashboard-header animate-in">
+                <h1>🩸 Approved Donors</h1>
+                <p>Browse our list of verified organ donors</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-bar animate-in">
+                <select id="filter-blood" onchange="loadDonors()">
+                    <option value="">All Blood Groups</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+                <select id="filter-organ" onchange="loadDonors()">
+                    <option value="">All Organs</option>
+                    <option value="Kidney">Kidney</option>
+                    <option value="Liver">Liver</option>
+                    <option value="Heart">Heart</option>
+                    <option value="Lungs">Lungs</option>
+                    <option value="Eyes">Eyes</option>
+                    <option value="Pancreas">Pancreas</option>
+                </select>
+                <input type="text" id="filter-city" placeholder="Filter by city..." oninput="loadDonors()">
+                <span id="donor-count" style="color: var(--text-secondary); font-size: 0.9rem;"></span>
+            </div>
+
+            <!-- Donors Table -->
+            <div id="donors-container" class="animate-in">
+                <div class="empty-state">
+                    <h3>Loading donors...</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadDonors);
+
+        async function loadDonors() {
+            const bloodGroup = document.getElementById('filter-blood').value;
+            const organ = document.getElementById('filter-organ').value;
+            const city = document.getElementById('filter-city').value;
+
+            let endpoint = '/donors?';
+            if (bloodGroup) endpoint += `blood_group=${encodeURIComponent(bloodGroup)}&`;
+            if (organ) endpoint += `organ=${encodeURIComponent(organ)}&`;
+            if (city) endpoint += `city=${encodeURIComponent(city)}&`;
+
+            try {
+                const data = await apiFetch(endpoint);
+                const container = document.getElementById('donors-container');
+                document.getElementById('donor-count').textContent = `${data.count} donor(s) found`;
+
+                if (data.donors.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">🩸</div>
+                            <h3>No donors found</h3>
+                            <p>Try adjusting your filters or check back later.</p>
+                        </div>`;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th><th>Blood Group</th><th>Organ</th>
+                                    <th>Age</th><th>Gender</th><th>City</th><th>Registered</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.donors.map(d => `
+                                    <tr>
+                                        <td style="font-weight: 600; color: var(--text-primary);">${d.name}</td>
+                                        <td><span style="font-weight: 700; color: var(--danger);">${d.blood_group}</span></td>
+                                        <td><span style="color: var(--accent-primary);">${d.organ}</span></td>
+                                        <td>${d.age}</td>
+                                        <td>${d.gender}</td>
+                                        <td>${d.city}</td>
+                                        <td>${new Date(d.created_at).toLocaleDateString()}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>`;
+            } catch (error) {
+                console.error('Load donors error:', error);
+            }
+        }
+    </script>
+</body>
+
+</html>

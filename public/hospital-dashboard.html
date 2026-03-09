@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard - OrganDonate</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="icon">💚</span>
+            <span>OrganDonate</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/donor-list.html">Donors</a></li>
+            <li><a href="/matching-results.html">Matches</a></li>
+            <li><a href="/hospital-dashboard.html" class="active">My Dashboard</a></li>
+        </ul>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-auth"></div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="dashboard-header animate-in">
+                <h1>🏢 Hospital Dashboard</h1>
+                <p>Manage donors, patients, and organ transplant processes</p>
+            </div>
+
+            <!-- Hospital Profile -->
+            <div id="profile-section" class="animate-in">
+                <div class="section-header">
+                    <h2>Hospital Profile</h2>
+                </div>
+                <div class="card" style="max-width: 700px; margin-bottom: 2rem;">
+                    <div class="grid-2">
+                        <div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">
+                                Hospital Name</div>
+                            <div id="hospital-name" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem;">—
+                            </div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Contact
+                                Person</div>
+                            <div id="hospital-contact" style="margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Email
+                            </div>
+                            <div id="hospital-email" style="margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">License
+                                No</div>
+                            <div id="hospital-license"
+                                style="font-weight: 600; color: var(--accent-primary); margin-bottom: 1rem;">—</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Phone
+                            </div>
+                            <div id="hospital-phone" style="margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">City
+                            </div>
+                            <div id="hospital-city" style="margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Address
+                            </div>
+                            <div id="hospital-address" style="margin-bottom: 1rem;">—</div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Status:
+                        </span>
+                        <span id="hospital-status" class="badge badge-warning">pending</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Management Section (only for approved hospitals) -->
+            <div id="management-section" class="hidden">
+                <!-- Donor Verification -->
+                <div class="section-header mt-3">
+                    <h2>🩸 Donor Verification</h2>
+                </div>
+                <div id="donor-verification-list" class="mb-3">
+                    <div class="empty-state">
+                        <h3>Loading...</h3>
+                    </div>
+                </div>
+
+                <!-- Organ Requests -->
+                <div class="section-header mt-3">
+                    <h2>📋 Organ Requests</h2>
+                </div>
+                <div id="organ-requests-list">
+                    <div class="empty-state">
+                        <h3>Loading...</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hospital Registration Form -->
+            <div id="registration-section" class="hidden animate-in">
+                <div class="form-container" style="max-width: 650px; margin: 0;">
+                    <div class="form-card">
+                        <h2>Register Hospital</h2>
+                        <p class="subtitle">Complete your hospital profile for verification</p>
+
+                        <form onsubmit="handleHospitalRegistration(event)">
+                            <div class="form-group">
+                                <label for="reg-name">Hospital Name *</label>
+                                <input type="text" id="reg-name" placeholder="Official hospital name" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-license">License Number *</label>
+                                    <input type="text" id="reg-license" placeholder="Hospital license no." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-phone">Phone Number *</label>
+                                    <input type="tel" id="reg-phone" placeholder="Hospital phone" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-city">City *</label>
+                                <input type="text" id="reg-city" placeholder="City" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-address">Full Address *</label>
+                                <textarea id="reg-address" placeholder="Complete hospital address..."
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                style="width: 100%; justify-content: center;">
+                                Register Hospital
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/hospital.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - OrganDonate</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="icon">💚</span>
+            <span>OrganDonate</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/donor-list.html">Donors</a></li>
+            <li><a href="/register.html" class="active">Register</a></li>
+        </ul>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-auth">
+            <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+            <a href="/register.html" class="btn btn-primary btn-sm active">Register</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="form-container" style="max-width: 600px;">
+                <div class="form-card animate-in">
+                    <h2>Create Account</h2>
+                    <p class="subtitle">Choose your role to get started</p>
+
+                    <!-- Role Tabs -->
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="donor" onclick="switchTab('donor')">🩸 Donor</button>
+                        <button class="tab-btn" data-tab="patient" onclick="switchTab('patient')">🏥 Patient</button>
+                        <button class="tab-btn" data-tab="hospital" onclick="switchTab('hospital')">🏢 Hospital</button>
+                    </div>
+
+                    <!-- Donor Registration Form -->
+                    <div class="tab-content active" id="donor-form">
+                        <form onsubmit="handleRegister(event)">
+                            <div class="form-group">
+                                <label for="donor-name">Full Name</label>
+                                <input type="text" id="donor-name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-email">Email Address</label>
+                                <input type="email" id="donor-email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="donor-password">Password</label>
+                                    <input type="password" id="donor-password" placeholder="Min 6 characters" required
+                                        minlength="6">
+                                </div>
+                                <div class="form-group">
+                                    <label for="donor-confirm-password">Confirm Password</label>
+                                    <input type="password" id="donor-confirm-password" placeholder="Repeat password"
+                                        required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                style="width: 100%; justify-content: center;">
+                                Register as Donor
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Patient Registration Form -->
+                    <div class="tab-content" id="patient-form">
+                        <form onsubmit="handleRegister(event)">
+                            <div class="form-group">
+                                <label for="patient-name">Full Name</label>
+                                <input type="text" id="patient-name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patient-email">Email Address</label>
+                                <input type="email" id="patient-email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="patient-password">Password</label>
+                                    <input type="password" id="patient-password" placeholder="Min 6 characters" required
+                                        minlength="6">
+                                </div>
+                                <div class="form-group">
+                                    <label for="patient-confirm-password">Confirm Password</label>
+                                    <input type="password" id="patient-confirm-password" placeholder="Repeat password"
+                                        required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                style="width: 100%; justify-content: center;">
+                                Register as Patient
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Hospital Registration Form -->
+                    <div class="tab-content" id="hospital-form">
+                        <form onsubmit="handleRegister(event)">
+                            <div class="form-group">
+                                <label for="hospital-name">Contact Person Name</label>
+                                <input type="text" id="hospital-name" placeholder="Contact person full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="hospital-email">Hospital Email</label>
+                                <input type="email" id="hospital-email" placeholder="Hospital email address" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hospital-password">Password</label>
+                                    <input type="password" id="hospital-password" placeholder="Min 6 characters"
+                                        required minlength="6">
+                                </div>
+                                <div class="form-group">
+                                    <label for="hospital-confirm-password">Confirm Password</label>
+                                    <input type="password" id="hospital-confirm-password" placeholder="Repeat password"
+                                        required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                style="width: 100%; justify-content: center;">
+                                Register as Hospital
+                            </button>
+                        </form>
+                    </div>
+
+                    <p class="text-center mt-2" style="color: var(--text-secondary); font-size: 0.9rem;">
+                        Already have an account? <a href="/login.html">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+
+</html>

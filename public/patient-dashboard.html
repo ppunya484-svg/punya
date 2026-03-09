@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - OrganDonate</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="icon">💚</span>
+            <span>OrganDonate</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/patient-dashboard.html" class="active">My Dashboard</a></li>
+        </ul>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-auth"></div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="dashboard-header animate-in">
+                <h1>🏥 Patient Dashboard</h1>
+                <p>Manage your organ request and track matching status</p>
+            </div>
+
+            <!-- Patient Profile -->
+            <div id="profile-section" class="animate-in">
+                <div class="section-header">
+                    <h2>My Patient Profile</h2>
+                </div>
+                <div class="card" style="max-width: 700px;">
+                    <div class="grid-2">
+                        <div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Name
+                            </div>
+                            <div id="patient-name" style="font-weight: 600; margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Email
+                            </div>
+                            <div id="patient-email" style="margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Blood
+                                Group</div>
+                            <div id="patient-blood"
+                                style="font-weight: 700; font-size: 1.2rem; color: var(--danger); margin-bottom: 1rem;">
+                                —</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Organ
+                                Needed</div>
+                            <div id="patient-organ"
+                                style="font-weight: 600; color: var(--accent-primary); margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Urgency
+                            </div>
+                            <div id="patient-urgency" style="margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Age
+                            </div>
+                            <div id="patient-age" style="margin-bottom: 1rem;">—</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">City
+                            </div>
+                            <div id="patient-city" style="margin-bottom: 1rem;">—</div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Status:
+                        </span>
+                        <span id="patient-status" class="badge badge-warning">waiting</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Organ Request Section -->
+            <div id="request-section" class="hidden mt-3 animate-in">
+                <div class="section-header">
+                    <h2>Organ Requests</h2>
+                    <button id="request-btn" onclick="submitOrganRequest()" class="btn btn-primary">
+                        📋 Submit Organ Request
+                    </button>
+                </div>
+                <div id="requests-list">
+                    <div class="empty-state">
+                        <div class="icon">📋</div>
+                        <h3>Loading requests...</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <div id="registration-section" class="hidden animate-in">
+                <div class="form-container" style="max-width: 650px; margin: 0;">
+                    <div class="form-card">
+                        <h2>Complete Patient Registration</h2>
+                        <p class="subtitle">Fill in your details to request an organ</p>
+
+                        <form onsubmit="handlePatientRegistration(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-blood">Blood Group *</label>
+                                    <select id="reg-blood" required>
+                                        <option value="">Select Blood Group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-organ">Organ Needed *</label>
+                                    <select id="reg-organ" required>
+                                        <option value="">Select Organ</option>
+                                        <option value="Kidney">Kidney</option>
+                                        <option value="Liver">Liver</option>
+                                        <option value="Heart">Heart</option>
+                                        <option value="Lungs">Lungs</option>
+                                        <option value="Eyes">Eyes</option>
+                                        <option value="Pancreas">Pancreas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-urgency">Urgency Level *</label>
+                                    <select id="reg-urgency" required>
+                                        <option value="low">Low</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="high">High</option>
+                                        <option value="critical">Critical</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-age">Age *</label>
+                                    <input type="number" id="reg-age" min="1" max="120" placeholder="Your age" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-gender">Gender *</label>
+                                    <select id="reg-gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-phone">Phone Number *</label>
+                                    <input type="tel" id="reg-phone" placeholder="Phone number" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-city">City *</label>
+                                <input type="text" id="reg-city" placeholder="Your city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-condition">Medical Condition (Optional)</label>
+                                <textarea id="reg-condition"
+                                    placeholder="Describe your medical condition..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                style="width: 100%; justify-content: center;">
+                                Register as Patient
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/patient.js"></script>
+</body>
+
+</html>

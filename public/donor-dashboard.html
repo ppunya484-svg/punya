@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard - OrganDonate</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="icon">💚</span>
+            <span>OrganDonate</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/donor-list.html">Donors</a></li>
+            <li><a href="/donor-dashboard.html" class="active">My Dashboard</a></li>
+        </ul>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-auth"></div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="dashboard-header animate-in">
+                <h1>🩸 Donor Dashboard</h1>
+                <p>Manage your organ donation profile</p>
+            </div>
+
+            <!-- Donor Profile (shown if profile exists) -->
+            <div id="profile-section" class="animate-in">
+                <div class="section-header">
+                    <h2>My Donor Profile</h2>
+                </div>
+                <div class="card" style="max-width: 700px;">
+                    <div class="grid-2">
+                        <div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Name
+                            </div>
+                            <div id="donor-name" style="font-weight: 600; margin-bottom: 1rem;">—</div>
+
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Email
+                            </div>
+                            <div id="donor-email" style="margin-bottom: 1rem;">—</div>
+
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Blood
+                                Group</div>
+                            <div id="donor-blood"
+                                style="font-weight: 700; font-size: 1.2rem; color: var(--danger); margin-bottom: 1rem;">
+                                —</div>
+
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Organ
+                                Pledged</div>
+                            <div id="donor-organ"
+                                style="font-weight: 600; color: var(--accent-primary); margin-bottom: 1rem;">—</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Age
+                            </div>
+                            <div id="donor-age" style="margin-bottom: 1rem;">—</div>
+
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Gender
+                            </div>
+                            <div id="donor-gender" style="margin-bottom: 1rem;">—</div>
+
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Phone
+                            </div>
+                            <div id="donor-phone" style="margin-bottom: 1rem;">—</div>
+
+                            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">City
+                            </div>
+                            <div id="donor-city" style="margin-bottom: 1rem;">—</div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Status:
+                        </span>
+                        <span id="donor-status" class="badge badge-warning">pending</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form (shown if no profile) -->
+            <div id="registration-section" class="hidden animate-in">
+                <div class="form-container" style="max-width: 650px; margin: 0;">
+                    <div class="form-card">
+                        <h2>Complete Donor Registration</h2>
+                        <p class="subtitle">Fill in your details to register as an organ donor</p>
+
+                        <form onsubmit="handleDonorRegistration(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-blood">Blood Group *</label>
+                                    <select id="reg-blood" required>
+                                        <option value="">Select Blood Group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-organ">Organ to Donate *</label>
+                                    <select id="reg-organ" required>
+                                        <option value="">Select Organ</option>
+                                        <option value="Kidney">Kidney</option>
+                                        <option value="Liver">Liver</option>
+                                        <option value="Heart">Heart</option>
+                                        <option value="Lungs">Lungs</option>
+                                        <option value="Eyes">Eyes</option>
+                                        <option value="Pancreas">Pancreas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-age">Age *</label>
+                                    <input type="number" id="reg-age" min="18" max="65" placeholder="Your age" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-gender">Gender *</label>
+                                    <select id="reg-gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-phone">Phone Number *</label>
+                                    <input type="tel" id="reg-phone" placeholder="Your phone number" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-city">City *</label>
+                                    <input type="text" id="reg-city" placeholder="Your city" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-history">Medical History (Optional)</label>
+                                <textarea id="reg-history" placeholder="Any relevant medical history..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                style="width: 100%; justify-content: center;">
+                                Register as Donor
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/donor.js"></script>
+</body>
+
+</html>

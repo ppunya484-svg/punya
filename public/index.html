@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Organ Donation Management System - Save lives by connecting organ donors with patients in need.">
+    <title>Organ Donation Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="icon">💚</span>
+            <span>OrganDonate</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/donor-list.html">Donors</a></li>
+            <li><a href="/register.html">Register</a></li>
+        </ul>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-auth">
+            <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+            <a href="/register.html" class="btn btn-primary btn-sm">Register</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Give the Gift of <span class="highlight">Life</span></h1>
+            <p>Connect organ donors with patients in need through our secure, intelligent matching platform. Together, we can save lives.</p>
+            <div class="hero-buttons">
+                <a href="/register.html" class="btn btn-primary btn-lg">🩸 Become a Donor</a>
+                <a href="/register.html" class="btn btn-outline btn-lg">🏥 Register as Hospital</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="container">
+            <div class="text-center mb-3">
+                <h2 style="font-size: 2rem; font-weight: 700;">How It Works</h2>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;">A simple 3-step process to make organ donation accessible to everyone</p>
+            </div>
+            <div class="grid-3">
+                <div class="card animate-in" style="animation-delay: 0.1s;">
+                    <div class="card-icon" style="background: rgba(16, 185, 129, 0.15);">🩸</div>
+                    <h3>Register as Donor</h3>
+                    <p>Sign up, complete your profile with blood group and organ details. Your information stays secure and confidential.</p>
+                </div>
+                <div class="card animate-in" style="animation-delay: 0.2s;">
+                    <div class="card-icon" style="background: rgba(59, 130, 246, 0.15);">🔬</div>
+                    <h3>Smart Matching</h3>
+                    <p>Our algorithm matches donors and patients based on blood group compatibility and organ type for the best possible outcomes.</p>
+                </div>
+                <div class="card animate-in" style="animation-delay: 0.3s;">
+                    <div class="card-icon" style="background: rgba(245, 158, 11, 0.15);">🏥</div>
+                    <h3>Hospital Verification</h3>
+                    <p>Verified hospitals manage the transplant process, ensuring safety, compliance, and successful transplantation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section container">
+            <div class="grid-4">
+                <div class="card stat-card">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Organs Supported</span>
+                </div>
+                <div class="card stat-card">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Blood Groups</span>
+                </div>
+                <div class="card stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Available</span>
+                </div>
+                <div class="card stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Secure</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Organs Section -->
+        <section class="container">
+            <div class="text-center mb-3">
+                <h2 style="font-size: 2rem; font-weight: 700;">Organs We Support</h2>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;">We facilitate matching for all major transplantable organs</p>
+            </div>
+            <div class="grid-3">
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🫘</div>
+                    <h3>Kidney</h3>
+                    <p>Most commonly transplanted organ worldwide</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🫁</div>
+                    <h3>Liver</h3>
+                    <p>Life-saving for patients with liver failure</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">❤️</div>
+                    <h3>Heart</h3>
+                    <p>Critical for end-stage heart disease patients</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🫁</div>
+                    <h3>Lungs</h3>
+                    <p>Essential for respiratory failure cases</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">👁️</div>
+                    <h3>Eyes</h3>
+                    <p>Corneal transplants restore vision</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔬</div>
+                    <h3>Pancreas</h3>
+                    <p>Vital for severe diabetes patients</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="container text-center" style="padding: 4rem 2rem;">
+            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Ready to Save a Life?</h2>
+            <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem;">
+                Join our platform today and be part of the change. Every registration brings us closer to saving a life.
+            </p>
+            <div class="hero-buttons">
+                <a href="/register.html" class="btn btn-primary btn-lg">Get Started Now →</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 Organ Donation Management System | Built with ❤️ for saving lives</p>
+            <p style="margin-top: 0.5rem;">Final Year College Project — Healthcare Domain</p>
+        </footer>
+    </div>
+
+    <script src="/js/api.js"></script>
+</body>
+</html>
